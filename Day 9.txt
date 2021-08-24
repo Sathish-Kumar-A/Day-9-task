@@ -1,0 +1,68 @@
+a) Get all the countries from Asia continent /region using Filter function
+
+fetch("https://restcountries.eu/rest/v2/all")
+.then((resp) => {return resp.json();})
+.then((result) => {
+   let asia=result.filter(function(element){
+       return element.region=="Asia"; 
+   });
+  
+   console.log(asia);
+    })
+.catch((err) => {console.log(err);});
+___________________________________________________________________
+b) Get all the countries with a population of less than 2 lakhs using Filter function
+
+fetch("https://restcountries.eu/rest/v2/all")
+.then((resp) => {return resp.json();})
+.then((result) => {
+   let asia=result.filter(function(element){
+       return element.population<200000; 
+   });
+  
+   console.log(asia);
+    })
+.catch((err) => {console.log(err);});
+________________________________________________________________________
+c) Print the following details name, capital, flag using forEach function
+
+fetch("https://restcountries.eu/rest/v2/all")
+.then((resp) => {return resp.json();})
+.then((result) => {
+    result.forEach(element => {
+        let {name,capital,flag}=element;
+        console.log(name,capital,flag);
+    });
+})
+.catch((err) => {console.log(err);});
+
+_________________________________________________________________________
+d) Print the total population of countries using reduce function
+
+fetch("https://restcountries.eu/rest/v2/all")
+.then((resp) => {return resp.json();})
+.then((result) => {
+    let totalPopulation=result.reduce(((sum,element)=> sum+ element.population),0);
+    console.log(totalPopulation);
+})
+.catch((err) => {console.log(err);
+});
+_____________________________________________________________________________
+e) Print the country which uses US Dollars as currency.
+
+fetch("https://restcountries.eu/rest/v2/all")
+.then((resp) => {return resp.json();})
+.then((result) => {
+   let asia=result.filter(function(element){
+    for(var country in element.currencies){
+        if(element.currencies[country].code=="USD"){
+            return element
+        }
+    } 
+});
+
+for(var x of asia){
+    console.log(x.name);
+}})
+.catch((err) => {console.log(err);});
+________________________________________________________________________________
